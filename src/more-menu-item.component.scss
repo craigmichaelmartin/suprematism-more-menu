@@ -1,0 +1,15 @@
+@import "scss/colors";
+
+:host {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: 400;
+    color: $text-color;
+    text-align: inherit;
+    background: 0 0;
+    border: 0;
+}
+.moreMenu-item:hover {
+  cursor: pointer;
+}

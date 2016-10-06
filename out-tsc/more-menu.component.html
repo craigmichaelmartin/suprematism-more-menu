@@ -1,0 +1,8 @@
+<span class="moreMenu-iconContainer">
+  <i [ngClass]="[isIn ? 'isActive' : 'isInactive', vivid ? 'isVivid' : 'isNotVivid', visible ? 'isVisible' : 'isNotVisible']"
+    class="moreMenu-icon ion ion-more js-moreMenuIcon"></i>
+</span>
+<div *ngIf="isIn" [ngClass]="['align-' + align]"
+  class="js-moreMenuItems moreMenu-items">
+    <ng-content></ng-content>
+</div>

@@ -1,31 +1,74 @@
-# SuprematismTooltip
+# Suprematism More Menu
 
-This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.16.
+An Angular 2 more menu component.
 
-## Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+#### Installation
+```bash
+npm i -S CINBCUniversal/suprematism-more-menu
+```
+Until it is published to npm, point to github. A consequence of this is that
+built files must be checked-in. When we publish to npm with `npm publish`,
+there is a prehook to build the files and a posthook to delete them
+(so only source files are saved in git). For now, after doing development,
+we must manually run the publish prehook and save the files.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class`.
 
-## Build
+#### View
+- [Hosted on Github Pages](https://cinbcuniversal.github.io/suprematism-more-menu/)
+- Run the example locally with `npm run example`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
 
-## Running unit tests
+## Components
+- [`supre-more-menu`](#supre-more-menu)
+- [`supre-more-menu-item`](#supre-more-menu-item)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+#### <a id="supre-more-menu"></a> `supre-more-menu`
+A component for a more menu.
 
-## Running end-to-end tests
+##### Directives
+- `supreVivid: boolean`: Manages vividness state ui for the menu icon
+  (defaults to true).
+  This directive allows the component to have a "in the background" state.
+  If not provided, the default value is constantly true, so the component is
+  always looking vivid and ready for use.
+  Enhancement: Rather than the parent component managing this state by toggling
+  this directive, have this directive accept a stream, where the component can
+  be reactive to the stream.
+- `supreAlign: AlignType`: Specifies how the menu popover should
+  be aligned with respect to the icon (defaults to 'right')
+- `supreVisible: boolean`: Specifies whether the menu icon is visible
+  (defaults to true)
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/). 
-Before running the tests make sure you are serving the app via `ng serve`.
+##### Events
+ - `itemSelected: Item`: Component triggers an itemSelected event when an item
+   is selected.
 
-## Deploying to Github Pages
+#### <a id="supre-more-menu-item"></a> `supre-more-menu-item`
+A component to be nested in `supre-more-menu`.
 
-Run `ng github-pages:deploy` to deploy to Github Pages.
+##### Directives
+- `supreText: string`: The text to be displayed for the menu item.
 
-## Further help
 
-To get more help on the `angular-cli` use `ng --help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## States
+- The more menu component has four states:
+  - not visible
+  - visible
+  - not vivid
+  - inactive
+  - vivid
+  - active
+
+
+## Example
+```html
+<supre-more-menu
+    supreAlign="left"
+    [supreVivid]="false"
+    class="js-notVividLeftMenu">
+  <supre-more-menu-item supreText="First menu item"></supre-more-menu-item>
+  <supre-more-menu-item supreText="Second item"></supre-more-menu-item>
+  <supre-more-menu-item supreText="Third"></supre-more-menu-item>
+</supre-more-menu>
+```

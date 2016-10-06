@@ -1,22 +1,20 @@
 {
   "project": {
     "version": "1.0.0-beta.16",
-    "name": "suprematism-tooltip"
+    "name": "suprematism-more-menu"
   },
   "apps": [
     {
       "root": "src",
       "outDir": "dist",
       "assets": "assets",
-      "index": "index.html",
-      "main": "main.ts",
+      "index": "../example/index.html",
+      "main": "../example/main.ts",
       "test": "test.ts",
       "tsconfig": "tsconfig.json",
       "prefix": "app",
       "mobile": false,
-      "styles": [
-        "styles.css"
-      ],
+      "styles": [],
       "scripts": [],
       "environments": {
         "source": "environments/environment.ts",
@@ -38,7 +36,7 @@
     }
   },
   "defaults": {
-    "styleExt": "css",
+    "styleExt": "scss",
     "prefixInterfaces": false
   }
 }

@@ -1,0 +1,53 @@
+:host {
+  display: inline-block; }
+
+.moreMenu-iconContainer {
+  text-align: center; }
+
+.moreMenu-icon {
+  background-color: #35c5d6; }
+
+.moreMenu-icon.isNotVisible {
+  visibility: hidden; }
+
+.moreMenu-icon.isVisible {
+  visibility: visible; }
+
+.moreMenu-icon.isNotVivid {
+  background-color: #c8e2f2; }
+
+.moreMenu-icon.isInactive {
+  background-color: #c8e2f2; }
+
+.moreMenu-icon.isVivid {
+  background-color: #35c5d6; }
+
+.moreMenu-icon.isActive {
+  background-color: #35c5d6; }
+
+.moreMenu-icon {
+  border: 3px solid #fff;
+  color: #fff;
+  border-radius: 50%;
+  width: 1em;
+  height: 1em; }
+
+.moreMenu-items {
+  position: absolute;
+  width: 180px;
+  border: 3px solid #35c5d6;
+  border-radius: 5px;
+  background-color: #fff;
+  padding: 8px 0;
+  height: auto;
+  max-height: 180px;
+  overflow-x: hidden; }
+
+.moreMenu-items.align-left {
+  margin-left: -160px; }
+
+.moreMenu-items.align-middle {
+  margin-left: -80px; }
+
+.moreMenu-items.align-right {
+  margin-left: inherit; }
