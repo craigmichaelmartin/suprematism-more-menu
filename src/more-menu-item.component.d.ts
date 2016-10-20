@@ -1,3 +1,6 @@
+import { EventEmitter } from '@angular/core';
 export declare class MoreMenuItemComponent {
-    text: string;
+    id: string;
+    itemSelected: EventEmitter<{}>;
+    triggerOnClick(): void;
 }
