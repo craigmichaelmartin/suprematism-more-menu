@@ -1,6 +1,8 @@
-import { EventEmitter } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
 export declare class MoreMenuItemComponent {
     id: string;
-    itemSelected: EventEmitter<{}>;
+    protected clickSource: Subject<{}>;
+    click$: Observable<string>;
     triggerOnClick(): void;
 }

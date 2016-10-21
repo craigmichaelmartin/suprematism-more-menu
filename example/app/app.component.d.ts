@@ -1,6 +1,6 @@
 export declare class ItemSelectable {
     itemId: string;
-    onItemSelected(id: string): void;
+    onItemSelected(item: any): void;
 }
 export declare class ExampleNoDirectives extends ItemSelectable {
 }
