@@ -22,8 +22,6 @@ var MoreMenuComponent = (function () {
     function MoreMenuComponent() {
         // Properties
         this._state = MoreMenuComponent.createNewState({});
-        // Used for subscribe for the template
-        this.options = this.provideDefaultOptions({});
         this.isInSubject = new Subject_1.Subject();
         this.isIn$ = this.isInSubject.startWith(false);
         // Inputs / Outputs
@@ -53,10 +51,7 @@ var MoreMenuComponent = (function () {
     // Lifecyle Callbacks
     MoreMenuComponent.prototype.ngOnInit = function () {
         var _a = this.state, align$ = _a.align$, vivid$ = _a.vivid$, visible$ = _a.visible$;
-        var combine$ = combineLatest_1.combineLatest(align$, vivid$, visible$, this.isIn$, argsToObj);
-        this.optionsSubscription = combine$
-            .map(this.provideDefaultOptions.bind(this))
-            .subscribe(this.updateOptions.bind(this));
+        this.options$ = combineLatest_1.combineLatest(align$, vivid$, visible$, this.isIn$, argsToObj);
     };
     MoreMenuComponent.prototype.ngAfterContentInit = function () {
         var getItemSelected$ = function (item) { return item.click$; };
@@ -66,7 +61,6 @@ var MoreMenuComponent = (function () {
     };
     MoreMenuComponent.prototype.ngOnDestroy = function () {
         this.subscription.unsubscribe();
-        this.optionsSubscription.unsubscribe();
     };
     // Event listeners
     MoreMenuComponent.prototype.showMenuOnHover = function () {
@@ -102,9 +96,6 @@ var MoreMenuComponent = (function () {
             visible: options.visible != null ?
                 options.visible : MoreMenuComponent.defaultVisibleValue
         };
-    };
-    MoreMenuComponent.prototype.updateOptions = function (options) {
-        this.options = options;
     };
     // Static Member Variables
     MoreMenuComponent.defaultVividValue = true;

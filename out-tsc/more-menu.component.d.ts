@@ -13,12 +13,11 @@ export declare class MoreMenuComponent implements OnDestroy, AfterContentInit, O
     static defaultIsInValue: boolean;
     private _state;
     state: any;
-    private options;
+    private options$;
     menuItems: QueryList<MoreMenuItemComponent>;
     private isInSubject;
     private isIn$;
     private subscription;
-    private optionsSubscription;
     itemSelected: EventEmitter<{}>;
     static createNewState({align, alignSubject, align$, vivid, vividSubject, vivid$, visible, visibleSubject, visible$}: any): StateInterface;
     ngOnInit(): void;
@@ -30,5 +29,4 @@ export declare class MoreMenuComponent implements OnDestroy, AfterContentInit, O
     hideMenu(): void;
     protected itemUpdated(item: Item): void;
     protected provideDefaultOptions(options: any): MoreMenuOptionsInterface;
-    protected updateOptions(options: MoreMenuOptionsInterface): void;
 }

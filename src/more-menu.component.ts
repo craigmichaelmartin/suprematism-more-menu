@@ -40,7 +40,7 @@ export class MoreMenuComponent implements OnDestroy, AfterContentInit, OnInit {
   }
 
   // Used for subscribe for the template
-  private options: MoreMenuOptionsInterface = this.provideDefaultOptions({});
+  private options$: Observable<MoreMenuOptionsInterface>;
 
   @ContentChildren(MoreMenuItemComponent)
   menuItems: QueryList<MoreMenuItemComponent>;
@@ -50,8 +50,6 @@ export class MoreMenuComponent implements OnDestroy, AfterContentInit, OnInit {
   private isIn$: Observable<boolean> = this.isInSubject.startWith(false);
 
   private subscription: Subscription;
-
-  private optionsSubscription: Subscription;
 
 
   // Inputs / Outputs
@@ -86,10 +84,7 @@ export class MoreMenuComponent implements OnDestroy, AfterContentInit, OnInit {
 
   ngOnInit() {
     const { align$, vivid$, visible$ } = this.state;
-    const combine$ = combineLatest(align$, vivid$, visible$, this.isIn$, argsToObj);
-    this.optionsSubscription = combine$
-      .map(this.provideDefaultOptions.bind(this))
-      .subscribe(this.updateOptions.bind(this));
+    this.options$ = combineLatest(align$, vivid$, visible$, this.isIn$, argsToObj);
   }
 
   ngAfterContentInit(): void {
@@ -101,7 +96,6 @@ export class MoreMenuComponent implements OnDestroy, AfterContentInit, OnInit {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
-    this.optionsSubscription.unsubscribe();
   }
 
 
@@ -153,10 +147,6 @@ export class MoreMenuComponent implements OnDestroy, AfterContentInit, OnInit {
       visible: options.visible != null ?
         options.visible : MoreMenuComponent.defaultVisibleValue
     };
-  }
-
-  protected updateOptions(options: MoreMenuOptionsInterface) {
-    this.options = options;
   }
 
 }
