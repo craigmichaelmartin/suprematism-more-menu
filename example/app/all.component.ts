@@ -228,7 +228,7 @@ export class ExampleDynamicallyVisibleLeftAligned extends ItemSelectable {
     <span>An example row showing the states of the more menu.</span>
     <supre-more-menu
         (itemSelected)="onItemSelected($event)"
-        [supreState]="{align: 'middle', vivid: false, visible: false, visibleSubject: visibleSubject}"
+        [supreState]="{align: 'right', vivid: false, visible: false, visibleSubject: visibleSubject}"
         class="js-dynamicallyVisibleLeftMenu">
       ${baseMenuItems}
     </supre-more-menu>
