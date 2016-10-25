@@ -1,6 +1,7 @@
 import { Component, HostListener, Input } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
+import { Item } from './item';
 
 @Component({
   selector: 'supre-more-menu-item',
@@ -11,8 +12,8 @@ export class MoreMenuItemComponent {
 
   // Inputs / Outputs
 
-  @Input('supreItemId')
-  public id: string;
+  @Input('supreItem')
+  public item: Item;
 
 
   // Properties
@@ -25,7 +26,7 @@ export class MoreMenuItemComponent {
 
   @HostListener('click')
   public triggerOnClick(): void {
-    this.clickSource.next({id: this.id});
+    this.clickSource.next(this.item);
   }
 
 }

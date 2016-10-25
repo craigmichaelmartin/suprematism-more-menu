@@ -1,8 +1,8 @@
 <span class="moreMenu-iconContainer">
-  <i [ngClass]="[isIn ? 'isActive' : 'isInactive', vivid ? 'isVivid' : 'isNotVivid', visible ? 'isVisible' : 'isNotVisible']"
+  <i [ngClass]="[options.isIn ? 'isActive' : 'isInactive', options.vivid ? 'isVivid' : 'isNotVivid', options.visible ? 'isVisible' : 'isNotVisible']"
     class="moreMenu-icon ion ion-more js-moreMenuIcon"></i>
 </span>
-<div *ngIf="isIn" [ngClass]="['align-' + align]"
+<div *ngIf="options.isIn" [ngClass]="['align-' + options.align]"
   class="js-moreMenuItems moreMenu-items">
     <ng-content></ng-content>
 </div>

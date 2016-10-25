@@ -10,17 +10,54 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var more_menu_item_component_1 = require('./more-menu-item.component');
+var Subject_1 = require('rxjs/Subject');
 var merge_1 = require('rxjs/Observable/merge');
+var combineLatest_1 = require('rxjs/Observable/combineLatest');
+require('rxjs/add/operator/map');
+require('rxjs/add/operator/startWith');
+var argsToObj = function (align, vivid, visible, isIn) {
+    return { align: align, vivid: vivid, visible: visible, isIn: isIn };
+};
 var MoreMenuComponent = (function () {
     function MoreMenuComponent() {
+        // Properties
+        this._state = MoreMenuComponent.createNewState({});
+        // Used for subscribe for the template
+        this.options = this.provideDefaultOptions({});
+        this.isInSubject = new Subject_1.Subject();
+        this.isIn$ = this.isInSubject.startWith(false);
         // Inputs / Outputs
-        this.align = 'right';
-        this.vivid = true;
-        this.visible = true;
         this.itemSelected = new core_1.EventEmitter();
-        this.isIn = false;
     }
+    Object.defineProperty(MoreMenuComponent.prototype, "state", {
+        get: function () {
+            return this._state;
+        },
+        set: function (obj) {
+            this._state = MoreMenuComponent.createNewState(obj);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    // Public Static Methods
+    MoreMenuComponent.createNewState = function (_a) {
+        var _b = _a.align, align = _b === void 0 ? this.defaultAlignValue : _b, _c = _a.alignSubject, alignSubject = _c === void 0 ? new Subject_1.Subject() : _c, align$ = _a.align$, _d = _a.vivid, vivid = _d === void 0 ? this.defaultVividValue : _d, _e = _a.vividSubject, vividSubject = _e === void 0 ? new Subject_1.Subject() : _e, vivid$ = _a.vivid$, _f = _a.visible, visible = _f === void 0 ? this.defaultVisibleValue : _f, _g = _a.visibleSubject, visibleSubject = _g === void 0 ? new Subject_1.Subject() : _g, visible$ = _a.visible$;
+        return {
+            alignSubject: alignSubject, align$: align$ || alignSubject.startWith(align),
+            vividSubject: vividSubject, vivid$: vivid$ || vividSubject.startWith(vivid),
+            visibleSubject: visibleSubject, visible$: visible$ || visibleSubject.startWith(visible),
+            visibleOriginal: visible && !visible$,
+            vividOriginal: vivid && !vivid$ // hack: see note in itemUpdated fn
+        };
+    };
     // Lifecyle Callbacks
+    MoreMenuComponent.prototype.ngOnInit = function () {
+        var _a = this.state, align$ = _a.align$, vivid$ = _a.vivid$, visible$ = _a.visible$;
+        var combine$ = combineLatest_1.combineLatest(align$, vivid$, visible$, this.isIn$, argsToObj);
+        this.optionsSubscription = combine$
+            .map(this.provideDefaultOptions.bind(this))
+            .subscribe(this.updateOptions.bind(this));
+    };
     MoreMenuComponent.prototype.ngAfterContentInit = function () {
         var getItemSelected$ = function (item) { return item.click$; };
         var menuItemsArray = this.menuItems.map(getItemSelected$);
@@ -29,6 +66,7 @@ var MoreMenuComponent = (function () {
     };
     MoreMenuComponent.prototype.ngOnDestroy = function () {
         this.subscription.unsubscribe();
+        this.optionsSubscription.unsubscribe();
     };
     // Event listeners
     MoreMenuComponent.prototype.showMenuOnHover = function () {
@@ -39,36 +77,52 @@ var MoreMenuComponent = (function () {
     };
     // Public Methods
     MoreMenuComponent.prototype.showMenu = function () {
-        this.isIn = true;
+        this.isInSubject.next(true);
     };
     MoreMenuComponent.prototype.hideMenu = function () {
-        this.isIn = false;
+        this.isInSubject.next(false);
     };
     // Protected Methods
     MoreMenuComponent.prototype.itemUpdated = function (item) {
         this.itemSelected.emit(item);
         this.hideMenu();
+        // Ugh, hacks; stored original values to account for mouse out
+        // event not firing when more menu is dynamically closed
+        this.state.visibleSubject.next(this.state.visibleOriginal);
+        this.state.vividSubject.next(this.state.vividOriginal);
     };
+    MoreMenuComponent.prototype.provideDefaultOptions = function (options) {
+        return {
+            isIn: options.isIn != null ?
+                options.isIn : MoreMenuComponent.defaultIsInValue,
+            align: options.align != null ?
+                options.align : MoreMenuComponent.defaultAlignValue,
+            vivid: options.vivid != null ?
+                options.vivid : MoreMenuComponent.defaultVividValue,
+            visible: options.visible != null ?
+                options.visible : MoreMenuComponent.defaultVisibleValue
+        };
+    };
+    MoreMenuComponent.prototype.updateOptions = function (options) {
+        this.options = options;
+    };
+    // Static Member Variables
+    MoreMenuComponent.defaultVividValue = true;
+    MoreMenuComponent.defaultAlignValue = 'right';
+    MoreMenuComponent.defaultVisibleValue = true;
+    MoreMenuComponent.defaultIsInValue = false;
     __decorate([
-        core_1.Input('supreAlign'), 
-        __metadata('design:type', String)
-    ], MoreMenuComponent.prototype, "align", void 0);
-    __decorate([
-        core_1.Input('supreVivid'), 
-        __metadata('design:type', Boolean)
-    ], MoreMenuComponent.prototype, "vivid", void 0);
-    __decorate([
-        core_1.Input('supreVisible'), 
-        __metadata('design:type', Boolean)
-    ], MoreMenuComponent.prototype, "visible", void 0);
-    __decorate([
-        core_1.Output(), 
+        core_1.Input('supreState'), 
         __metadata('design:type', Object)
-    ], MoreMenuComponent.prototype, "itemSelected", void 0);
+    ], MoreMenuComponent.prototype, "state", null);
     __decorate([
         core_1.ContentChildren(more_menu_item_component_1.MoreMenuItemComponent), 
         __metadata('design:type', core_1.QueryList)
     ], MoreMenuComponent.prototype, "menuItems", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], MoreMenuComponent.prototype, "itemSelected", void 0);
     __decorate([
         core_1.HostListener('focusin'),
         core_1.HostListener('mouseenter'), 

@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var Subject_1 = require('rxjs/Subject');
+var item_1 = require('./item');
 var MoreMenuItemComponent = (function () {
     function MoreMenuItemComponent() {
         // Properties
@@ -18,12 +19,12 @@ var MoreMenuItemComponent = (function () {
     }
     // Event listeners
     MoreMenuItemComponent.prototype.triggerOnClick = function () {
-        this.clickSource.next({ id: this.id });
+        this.clickSource.next(this.item);
     };
     __decorate([
-        core_1.Input('supreItemId'), 
-        __metadata('design:type', String)
-    ], MoreMenuItemComponent.prototype, "id", void 0);
+        core_1.Input('supreItem'), 
+        __metadata('design:type', item_1.Item)
+    ], MoreMenuItemComponent.prototype, "item", void 0);
     __decorate([
         core_1.HostListener('click'), 
         __metadata('design:type', Function), 

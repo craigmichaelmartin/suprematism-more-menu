@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { AllExamplesComponent, ExampleNoDirectives, ExampleLeftAligned,
+import { AllExamplesComponent, ExampleNoOptions, ExampleLeftAligned,
     ExampleMiddleAligned, ExampleRightAligned, ExampleDynamicallyVivid,
     ExampleDynamicallyVividMiddleAligned, ExampleNotVividLeftAligned,
     ExampleNotVivid, ExampleVivid, ExampleVisible, ExampleNotVisible,
@@ -23,7 +23,7 @@ const routes = [
     AppComponent,
     PertinentExampleComponent,
     AllExamplesComponent,
-    ExampleNoDirectives,
+    ExampleNoOptions,
     ExampleRightAligned,
     ExampleMiddleAligned,
     ExampleLeftAligned,

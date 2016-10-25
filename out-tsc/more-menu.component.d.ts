@@ -1,15 +1,27 @@
-import { AfterContentInit, EventEmitter, OnDestroy, QueryList } from '@angular/core';
+import { AfterContentInit, EventEmitter, OnDestroy, OnInit, QueryList } from '@angular/core';
 import { MoreMenuItemComponent } from './more-menu-item.component';
-import { AlignType } from './align.type';
 import { Item } from './item';
-export declare class MoreMenuComponent implements OnDestroy, AfterContentInit {
-    align: AlignType;
-    vivid: boolean;
-    visible: boolean;
-    itemSelected: EventEmitter<{}>;
+import { AlignType } from './align.type';
+import { MoreMenuOptionsInterface } from './more-menu-options.interface';
+import { StateInterface } from './state.interface';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/startWith';
+export declare class MoreMenuComponent implements OnDestroy, AfterContentInit, OnInit {
+    static defaultVividValue: boolean;
+    static defaultAlignValue: AlignType;
+    static defaultVisibleValue: boolean;
+    static defaultIsInValue: boolean;
+    private _state;
+    state: any;
+    private options;
     menuItems: QueryList<MoreMenuItemComponent>;
-    private isIn;
+    private isInSubject;
+    private isIn$;
     private subscription;
+    private optionsSubscription;
+    itemSelected: EventEmitter<{}>;
+    static createNewState({align, alignSubject, align$, vivid, vividSubject, vivid$, visible, visibleSubject, visible$}: any): StateInterface;
+    ngOnInit(): void;
     ngAfterContentInit(): void;
     ngOnDestroy(): void;
     showMenuOnHover(): void;
@@ -17,4 +29,6 @@ export declare class MoreMenuComponent implements OnDestroy, AfterContentInit {
     showMenu(): void;
     hideMenu(): void;
     protected itemUpdated(item: Item): void;
+    protected provideDefaultOptions(options: any): MoreMenuOptionsInterface;
+    protected updateOptions(options: MoreMenuOptionsInterface): void;
 }

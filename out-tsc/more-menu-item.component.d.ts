@@ -1,7 +1,8 @@
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
+import { Item } from './item';
 export declare class MoreMenuItemComponent {
-    id: string;
+    item: Item;
     protected clickSource: Subject<{}>;
     click$: Observable<string>;
     triggerOnClick(): void;

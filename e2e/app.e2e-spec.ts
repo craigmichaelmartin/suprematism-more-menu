@@ -6,67 +6,89 @@ const items = `First menu item
 Second menu item which just seems to keep going and going
 Third`;
 const primaryNotVividAlpha = 'rgba(200,226,242,1)';
-const primaryInactive = 'rgb(200,226,242)';
-const primaryVivid = 'rgb(53,197,214)';
+// const primaryInactive = 'rgb(200,226,242)';
+// const primaryVivid = 'rgb(53,197,214)';
 const primaryVividAlpha = 'rgba(53,197,214,1)';
 const primaryActive = 'rgb(53,197,214)';
-const primary = 'rgb(53,197,214)';
+// const primary = 'rgb(53,197,214)';
 
-const map = new Map([
+const map: any = new Map([
   ['default', {
-    'menuIconInitialText': 'vivid',
     'menuIconInitialBackground': primaryVividAlpha,
-    'menuActiveBorder': primaryActive
+    'menuActiveBorder': primaryActive,
+    'menuIconInitialVisibility': 'visible',
+    'menuIconDynamicBackground': '',
+    'menuIconDynamicVisibility': ''
   }],
   ['right', {
-    'menuIconInitialText': 'vivid',
     'menuIconInitialBackground': primaryVividAlpha,
-    'menuActiveBorder': primaryActive
+    'menuActiveBorder': primaryActive,
+    'menuIconInitialVisibility': 'visible',
+    'menuIconDynamicBackground': '',
+    'menuIconDynamicVisibility': ''
   }],
   ['middle', {
-    'menuIconInitialText': 'vivid',
     'menuIconInitialBackground': primaryVividAlpha,
-    'menuActiveBorder': primaryActive
+    'menuActiveBorder': primaryActive,
+    'menuIconInitialVisibility': 'visible',
+    'menuIconDynamicBackground': '',
+    'menuIconDynamicVisibility': ''
   }],
   ['left', {
-    'menuIconInitialText': 'vivid',
     'menuIconInitialBackground': primaryVividAlpha,
-    'menuActiveBorder': primaryActive
+    'menuActiveBorder': primaryActive,
+    'menuIconInitialVisibility': 'visible',
+    'menuIconDynamicBackground': '',
+    'menuIconDynamicVisibility': ''
   }],
   ['vivid', {
-    'menuIconInitialText': 'vivid',
     'menuIconInitialBackground': primaryVividAlpha,
-    'menuActiveBorder': primaryActive
+    'menuActiveBorder': primaryActive,
+    'menuIconInitialVisibility': 'visible',
+    'menuIconDynamicBackground': '',
+    'menuIconDynamicVisibility': ''
   }],
   ['notVivid', {
-    'menuIconInitialText': 'not vivid',
     'menuIconInitialBackground': primaryNotVividAlpha,
-    'menuActiveBorder': primaryActive
+    'menuActiveBorder': primaryActive,
+    'menuIconInitialVisibility': 'visible',
+    'menuIconDynamicBackground': '',
+    'menuIconDynamicVisibility': ''
   }],
   ['dynamicallyVivid', {
-    'menuIconInitialText': 'not vivid',
     'menuIconInitialBackground': primaryNotVividAlpha,
-    'menuActiveBorder': primaryActive
+    'menuActiveBorder': primaryActive,
+    'menuIconInitialVisibility': 'visible',
+    'menuIconDynamicBackground': primaryVividAlpha,
+    'menuIconDynamicVisibility': ''
   }],
   ['notVisible', {
-    'menuIconInitialText': 'not visible',
     'menuIconInitialBackground': primaryVividAlpha,
-    'menuActiveBorder': primaryActive
+    'menuActiveBorder': primaryActive,
+    'menuIconInitialVisibility': 'hidden',
+    'menuIconDynamicBackground': '',
+    'menuIconDynamicVisibility': ''
   }],
   ['visible', {
-    'menuIconInitialText': 'visible',
     'menuIconInitialBackground': primaryVividAlpha,
-    'menuActiveBorder': primaryActive
+    'menuActiveBorder': primaryActive,
+    'menuIconInitialVisibility': 'visible',
+    'menuIconDynamicBackground': '',
+    'menuIconDynamicVisibility': ''
   }],
   ['dynamicallyVisible', {
-    'menuIconInitialText': 'dynamically visible',
     'menuIconInitialBackground': primaryVividAlpha,
-    'menuActiveBorder': primaryActive
+    'menuActiveBorder': primaryActive,
+    'menuIconInitialVisibility': 'hidden',
+    'menuIconDynamicBackground': '',
+    'menuIconDynamicVisibility': 'visible'
   }],
   ['dynamicallyVividMiddle', {
-    'menuIconInitialText': 'not vivid',
     'menuIconInitialBackground': primaryNotVividAlpha,
-    'menuActiveBorder': primaryActive
+    'menuActiveBorder': primaryActive,
+    'menuIconInitialVisibility': 'visible',
+    'menuIconDynamicBackground': primaryVividAlpha,
+    'menuIconDynamicVisibility': ''
   }],
 ]);
 
@@ -78,25 +100,34 @@ const testFn = function(which) {
     expect(page.getParentText(which)).not.toContain(selectedItemText);
   });
   describe('before hovering', function() {
-    it('menu icon should be correct color ( ' + map.get(which).menuIconInitialText + ' )', () => {
+    it('menu icon should be correct vividness', () => {
       expect(page.getMenuIconStyles(which, 'background-color')).toEqual(map.get(which).menuIconInitialBackground);
+    });
+    it('menu icon should be correct visibility', () => {
+      expect(page.getMenuIconStyles(which, 'visibility')).toEqual(map.get(which).menuIconInitialVisibility);
     });
     it('menu items should not be rendered', () => {
       expect(page.isMenuPresent(which)).toEqual(false);
     });
   });
-  if (which.indexOf('dynamically')) {
-    describe('while receiving a changed state', function() {
-      beforeEach(() => {
-        page.hoverParentText(which);
-      });
+  describe('while receiving a changed state', function() {
+    beforeEach(() => {
+      page.hoverParentText(which);
     });
-  }
+    if (which.menuIconDynamicBackbround) {
+      it('should change the menu icon to correct vividness', () => {
+        expect(page.getMenuIconStyles(which, 'background-color')).toEqual(map.get(which).menuIconDynamicBackground);
+      });
+    }
+    if (which.menuIconDynamicVisibility) {
+      it('should change the menu icon to correct visibility', () => {
+        expect(page.getMenuIconStyles(which, 'visibility')).toEqual(map.get(which).menuIconDynamicVisibility);
+      });
+    }
+  });
   describe('while being hovered', function() {
     beforeEach(() => {
-      if (which.indexOf('dynamically')) {
-        page.hoverParentText(which);
-      }
+      page.hoverParentText(which);
       page.hoverOnMenuIcon(which);
     });
     it('should render the menu', () => {
@@ -118,6 +149,12 @@ const testFn = function(which) {
       });
       it('should close the menu', () => {
         expect(page.isMenuPresent(which)).toEqual(false);
+      });
+      it('should return the menu icon to original vividness', () => {
+        expect(page.getMenuIconStyles(which, 'background-color')).toEqual(map.get(which).menuIconInitialBackground);
+      });
+      it('should return the menu icon to original visibility', () => {
+        expect(page.getMenuIconStyles(which, 'visibility')).toEqual(map.get(which).menuIconInitialVisibility);
       });
     });
   });

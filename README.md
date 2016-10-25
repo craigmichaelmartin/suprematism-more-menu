@@ -27,18 +27,32 @@ we must manually run the publish prehook and save the files.
 A component for a more menu.
 
 ##### Directives
-- `supreVivid: boolean`: Manages vividness state ui for the menu icon
-  (defaults to true).
-  This directive allows the component to have a "in the background" state.
-  If not provided, the default value is constantly true, so the component is
-  always looking vivid and ready for use.
-  Enhancement: Rather than the parent component managing this state by toggling
-  this directive, have this directive accept a stream, where the component can
-  be reactive to the stream.
-- `supreAlign: AlignType`: Specifies how the menu popover should
-  be aligned with respect to the icon (defaults to 'right')
-- `supreVisible: boolean`: Specifies whether the menu icon is visible
-  (defaults to true)
+- `supreState`: An object which is used to construct a state property
+  in the more menu of type StateInterface to manage vivid, align, visible.
+  The StateInterface expects a subject and stream for each of these.
+    - `vividSubject: Subject<boolean` and `vivid$: Observable<boolean>`:
+      these manage the vividness state ui for the menu icon (defaults to true).
+      This allows the component to have a "in the background" state.
+      If not provided, the stream starts with true.
+    - `alignSubject: Subject<AlignType>` and `align$: Observable<AlignType>`:
+      these specify how the menu popover should be aligned with respect
+      to the icon. If not provided, the stream starts with 'right'.
+    - `visibleSubject: Subject<boolean>` and `visible$: Observable<boolean>`:
+      these specify whether the menu icon is visible
+      If not provided, the stream starts with true.
+  - The directive object is built into an object of StateInterface. To do so,
+    for each option (vivid, align, visible), any of the following are suitable:
+    - Nothing may be passed in for the option, which creates a subject
+      and an observable stream started with the default value.
+    - A value may be passed in for the option which creates a subject
+      and observable stream started with the value.
+    - A value and a subject may be passed in for the option which uses the
+      subject and creates an observable stream started with the value.
+    - A value and a subject and observable stream may be passed in for the
+      option, which uses the subject and observable stream started
+      with the value.
+    - A subject and observable stream may be passed in for the option,
+      which uses the subject and observable stream.
 
 ##### Events
  - `itemSelected: Item`: Component triggers an itemSelected event when an item
@@ -48,7 +62,8 @@ A component for a more menu.
 A component to be nested in `supre-more-menu`.
 
 ##### Directives
-- `supreText: string`: The text to be displayed for the menu item.
+- `supreItem: Item`: The item object corresponding to the transcluded
+  ng-content text to be displayed for the menu item.
 
 
 ## States
@@ -64,11 +79,10 @@ A component to be nested in `supre-more-menu`.
 ## Example
 ```html
 <supre-more-menu
-    supreAlign="left"
-    [supreVivid]="false"
-    class="js-notVividLeftMenu">
-  <supre-more-menu-item supreText="First menu item"></supre-more-menu-item>
-  <supre-more-menu-item supreText="Second item"></supre-more-menu-item>
-  <supre-more-menu-item supreText="Third"></supre-more-menu-item>
+    [supreState]="{align: 'middle', vivid: 'false'}"
+    class="js-notVividMiddleMenu">
+  <supre-more-menu-item [supreItem]="{id: 1}">First menu item</supre-more-menu-item>
+  <supre-more-menu-item [supreItem]="{id: 2}">Second item</supre-more-menu-item>
+  <supre-more-menu-item [supreItem]="{id: 3}">Third</supre-more-menu-item>
 </supre-more-menu>
 ```
