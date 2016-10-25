@@ -1,0 +1,12 @@
+:host {
+  display: block;
+  padding: 3px 20px;
+  clear: both;
+  font-weight: 400;
+  color: #373a3c;
+  text-align: inherit;
+  background: 0 0;
+  border: 0; }
+
+.moreMenu-item:hover {
+  cursor: pointer; }

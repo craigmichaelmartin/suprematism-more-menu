@@ -6,7 +6,7 @@ import { Item } from './item';
 @Component({
   selector: 'supre-more-menu-item',
   template: require('./more-menu-item.component.html'),
-  styles: [require('./more-menu-item.component.scss')] // when developing use .scss
+  styles: [require('./more-menu-item.component.css')]
 })
 export class MoreMenuItemComponent {
 
