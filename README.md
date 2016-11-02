@@ -1,31 +1,88 @@
-# SuprematismTooltip
+# Suprematism More Menu
 
-This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.16.
+An Angular 2 more menu component.
 
-## Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+#### Installation
+```bash
+npm i -S CINBCUniversal/suprematism-more-menu
+```
+Until it is published to npm, point to github. A consequence of this is that
+built files must be checked-in. When we publish to npm with `npm publish`,
+there is a prehook to build the files and a posthook to delete them
+(so only source files are saved in git). For now, after doing development,
+we must manually run the publish prehook and save the files.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class`.
 
-## Build
+#### View
+- [Hosted on Github Pages](https://cinbcuniversal.github.io/suprematism-more-menu/)
+- Run the example locally with `npm run example`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
 
-## Running unit tests
+## Components
+- [`supre-more-menu`](#supre-more-menu)
+- [`supre-more-menu-item`](#supre-more-menu-item)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+#### <a id="supre-more-menu"></a> `supre-more-menu`
+A component for a more menu.
 
-## Running end-to-end tests
+##### Directives
+- `supreState`: An object which is used to construct a state property
+  in the more menu of type StateInterface to manage vivid, align, visible.
+  The StateInterface expects a subject and stream for each of these.
+    - `vividSubject: Subject<boolean` and `vivid$: Observable<boolean>`:
+      these manage the vividness state ui for the menu icon (defaults to true).
+      This allows the component to have a "in the background" state.
+      If not provided, the stream starts with true.
+    - `alignSubject: Subject<AlignType>` and `align$: Observable<AlignType>`:
+      these specify how the menu popover should be aligned with respect
+      to the icon. If not provided, the stream starts with 'right'.
+    - `visibleSubject: Subject<boolean>` and `visible$: Observable<boolean>`:
+      these specify whether the menu icon is visible
+      If not provided, the stream starts with true.
+  - The directive object is built into an object of StateInterface. To do so,
+    for each option (vivid, align, visible), any of the following are suitable:
+    - Nothing may be passed in for the option, which creates a subject
+      and an observable stream started with the default value.
+    - A value may be passed in for the option which creates a subject
+      and observable stream started with the value.
+    - A value and a subject may be passed in for the option which uses the
+      subject and creates an observable stream started with the value.
+    - A value and a subject and observable stream may be passed in for the
+      option, which uses the subject and observable stream started
+      with the value.
+    - A subject and observable stream may be passed in for the option,
+      which uses the subject and observable stream.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/). 
-Before running the tests make sure you are serving the app via `ng serve`.
+##### Events
+ - `itemSelected: Item`: Component triggers an itemSelected event when an item
+   is selected.
 
-## Deploying to Github Pages
+#### <a id="supre-more-menu-item"></a> `supre-more-menu-item`
+A component to be nested in `supre-more-menu`.
 
-Run `ng github-pages:deploy` to deploy to Github Pages.
+##### Directives
+- `supreItem: Item`: The item object corresponding to the transcluded
+  ng-content text to be displayed for the menu item.
 
-## Further help
 
-To get more help on the `angular-cli` use `ng --help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## States
+- The more menu component has four states:
+  - not visible
+  - visible
+  - not vivid
+  - inactive
+  - vivid
+  - active
+
+
+## Example
+```html
+<supre-more-menu
+    [supreState]="{align: 'middle', vivid: 'false'}"
+    class="js-notVividMiddleMenu">
+  <supre-more-menu-item [supreItem]="{id: 1}">First menu item</supre-more-menu-item>
+  <supre-more-menu-item [supreItem]="{id: 2}">Second item</supre-more-menu-item>
+  <supre-more-menu-item [supreItem]="{id: 3}">Third</supre-more-menu-item>
+</supre-more-menu>
+```
