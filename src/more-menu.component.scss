@@ -1,4 +1,5 @@
 @import "scss/colors";
+@import "../node_modules/suprematism-scss/z-indexes";
 
 $icon-width: 20px;
 $menu-width: 180px;
@@ -51,6 +52,7 @@ $menu-height-max: 180px;
   height: auto;
   max-height: $menu-height-max;
   overflow-x: hidden;
+  z-index: $z-index-dropdown-backdrop;
 }
 .moreMenu-items.align-left {
   margin-left: $align-left-margin-left;

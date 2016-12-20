@@ -41,7 +41,8 @@
   padding: 8px 0;
   height: auto;
   max-height: 180px;
-  overflow-x: hidden; }
+  overflow-x: hidden;
+  z-index: 100000; }
 
 .moreMenu-items.align-left {
   margin-left: -160px; }
