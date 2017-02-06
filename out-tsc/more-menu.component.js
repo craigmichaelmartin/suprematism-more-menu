@@ -11,8 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var more_menu_item_component_1 = require('./more-menu-item.component');
 var Subject_1 = require('rxjs/Subject');
-var merge_1 = require('rxjs/Observable/merge');
-var combineLatest_1 = require('rxjs/Observable/combineLatest');
+var merge_1 = require('rxjs/observable/merge');
+var combineLatest_1 = require('rxjs/observable/combineLatest');
 require('rxjs/add/operator/map');
 require('rxjs/add/operator/startWith');
 var argsToObj = function (align, vivid, visible, isIn) {
@@ -139,4 +139,4 @@ var MoreMenuComponent = (function () {
     return MoreMenuComponent;
 }());
 exports.MoreMenuComponent = MoreMenuComponent;
-//# sourceMappingURL=/Users/craigmartin/projects/suprematism-more-menu/src/more-menu.component.js.map
+//# sourceMappingURL=/Users/falosakers/Documents/Projects/suprematism-more-menu/src/more-menu.component.js.map

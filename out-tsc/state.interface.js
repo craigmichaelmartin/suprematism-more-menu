@@ -1,2 +1,2 @@
 "use strict";
-//# sourceMappingURL=/Users/craigmartin/projects/suprematism-more-menu/src/state.interface.js.map
+//# sourceMappingURL=/Users/falosakers/Documents/Projects/suprematism-more-menu/src/state.interface.js.map

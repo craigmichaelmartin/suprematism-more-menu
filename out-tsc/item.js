@@ -5,4 +5,4 @@ var Item = (function () {
     return Item;
 }());
 exports.Item = Item;
-//# sourceMappingURL=/Users/craigmartin/projects/suprematism-more-menu/src/item.js.map
+//# sourceMappingURL=/Users/falosakers/Documents/Projects/suprematism-more-menu/src/item.js.map

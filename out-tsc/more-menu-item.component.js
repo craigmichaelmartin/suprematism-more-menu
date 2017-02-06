@@ -42,4 +42,4 @@ var MoreMenuItemComponent = (function () {
     return MoreMenuItemComponent;
 }());
 exports.MoreMenuItemComponent = MoreMenuItemComponent;
-//# sourceMappingURL=/Users/craigmartin/projects/suprematism-more-menu/src/more-menu-item.component.js.map
+//# sourceMappingURL=/Users/falosakers/Documents/Projects/suprematism-more-menu/src/more-menu-item.component.js.map
