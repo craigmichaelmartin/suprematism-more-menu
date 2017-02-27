@@ -2,14 +2,24 @@
 
 :host {
     display: block;
-    padding: 3px 20px;
+    padding: 6px 10px;
     clear: both;
-    font-weight: 400;
-    color: $text-color;
+    font-weight: 600;
+    color: $text;
     text-align: inherit;
     background: 0 0;
     border: 0;
+    border-bottom: 1px solid $lite-gray;
+    font-size: 10px;
+    font-family: Verdana;
+    text-transform: uppercase;
+    margin: 0;
 }
-.moreMenu-item:hover {
+:host:hover {
   cursor: pointer;
+  color: $primary-active;
+  background-color: $soft-green;
+}
+.moreMenu-innerIcon {
+  padding-right: 10px;
 }

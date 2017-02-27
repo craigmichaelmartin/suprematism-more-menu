@@ -139,4 +139,4 @@ var MoreMenuComponent = (function () {
     return MoreMenuComponent;
 }());
 exports.MoreMenuComponent = MoreMenuComponent;
-//# sourceMappingURL=/Users/falosakers/Documents/Projects/suprematism-more-menu/src/more-menu.component.js.map
+//# sourceMappingURL=/Users/craigmartin/projects/suprematism-more-menu/src/more-menu.component.js.map

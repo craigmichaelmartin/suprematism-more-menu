@@ -1,3 +1,10 @@
+/**
+ * Design Reference:
+ * https://cacoo.com/diagrams/88x93Ppap4rtGUhs#5F65C
+ */
+/**
+ * Collection of the colors
+ */
 :host {
   display: inline-block; }
 
@@ -5,7 +12,7 @@
   text-align: center; }
 
 .moreMenu-icon {
-  background-color: #35c5d6; }
+  color: #55a0c2; }
 
 .moreMenu-icon.isNotVisible {
   visibility: hidden; }
@@ -14,41 +21,38 @@
   visibility: visible; }
 
 .moreMenu-icon.isNotVivid {
-  background-color: #c8e2f2; }
+  color: #9fb3c3; }
 
 .moreMenu-icon.isInactive {
-  background-color: #c8e2f2; }
+  color: #9fb3c3; }
 
 .moreMenu-icon.isVivid {
-  background-color: #35c5d6; }
+  color: #55a0c2; }
 
 .moreMenu-icon.isActive {
-  background-color: #35c5d6; }
+  color: #55a0c2; }
 
 .moreMenu-icon {
-  border: 3px solid #fff;
-  color: #fff;
-  border-radius: 50%;
+  color: #ffffff;
   width: 1em;
   height: 1em; }
 
 .moreMenu-items {
   position: absolute;
-  width: 180px;
-  border: 3px solid #35c5d6;
+  width: 120px;
+  border: 3px solid #55a0c2;
   border-radius: 5px;
-  background-color: #fff;
-  padding: 8px 0;
+  background-color: #ffffff;
   height: auto;
   max-height: 180px;
   overflow-x: hidden;
   z-index: 100000; }
 
 .moreMenu-items.align-left {
-  margin-left: -160px; }
+  margin-left: -100px; }
 
 .moreMenu-items.align-middle {
-  margin-left: -80px; }
+  margin-left: -50px; }
 
 .moreMenu-items.align-right {
   margin-left: inherit; }

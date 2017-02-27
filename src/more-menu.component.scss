@@ -1,8 +1,8 @@
 @import "scss/colors";
-@import "../node_modules/suprematism-scss/z-indexes";
+@import "../node_modules/suprematism-style-guide/dist/utils/z-indexes";
 
 $icon-width: 20px;
-$menu-width: 180px;
+$menu-width: 120px;
 $align-left-margin-left: - ($menu-width - $icon-width);
 $align-middle-margin-left: - ($menu-width/2 - $icon-width/2);
 $align-right-margin-left: inherit;
@@ -15,7 +15,7 @@ $menu-height-max: 180px;
   text-align: center;
 }
 .moreMenu-icon {
-  background-color: $primary;
+  color: $primary;
 }
 .moreMenu-icon.isNotVisible {
   visibility: hidden;
@@ -24,21 +24,19 @@ $menu-height-max: 180px;
   visibility: visible;
 }
 .moreMenu-icon.isNotVivid {
-  background-color: $primary-not-vivid;
+  color: $primary-not-vivid;
 }
 .moreMenu-icon.isInactive {
-  background-color: $primary-inactive;
+  color: $primary-inactive;
 }
 .moreMenu-icon.isVivid {
-  background-color: $primary-vivid;
+  color: $primary-vivid;
 }
 .moreMenu-icon.isActive {
-  background-color: $primary-active;
+  color: $primary-active;
 }
 .moreMenu-icon {
-  border: 3px solid $secondary-color;
   color: $secondary-color;
-  border-radius: 50%;
   width: 1em;
   height: 1em;
 }
@@ -48,7 +46,6 @@ $menu-height-max: 180px;
   border: 3px solid $primary;
   border-radius: 5px;
   background-color: $white;
-  padding: 8px 0;
   height: auto;
   max-height: $menu-height-max;
   overflow-x: hidden;
