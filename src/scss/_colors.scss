@@ -1,11 +1,13 @@
-@import "../../node_modules/suprematism-scss/_colors.scss";
+@import "../../node_modules/suprematism-style-guide/dist/utils/colors";
 
-$text-color: $gray-dark !default;
+$text-color: $blue-gray !default;
 
-$primary-not-vivid: $blue-pale !default;
-$primary-inactive: $blue-pale !default;
-$primary-vivid: $blue-light !default;
-$primary-active: $blue-light !default;
-$primary: $blue-light !default;
+$primary-not-vivid: $blue-gray !default;
+$primary-inactive: $blue-gray !default;
+$primary-vivid: $aqua !default;
+$primary-active: $aqua !default;
+$primary: $aqua !default;
 $secondary-color: $white !default;
-
+$text: $blue-gray !default;
+$lite-gray: $lite-gray !default;
+$soft-green: $soft-green !default;

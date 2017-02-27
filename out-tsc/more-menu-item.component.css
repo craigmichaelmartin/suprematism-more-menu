@@ -1,12 +1,29 @@
+/**
+ * Design Reference:
+ * https://cacoo.com/diagrams/88x93Ppap4rtGUhs#5F65C
+ */
+/**
+ * Collection of the colors
+ */
 :host {
   display: block;
-  padding: 3px 20px;
+  padding: 6px 10px;
   clear: both;
-  font-weight: 400;
-  color: #373a3c;
+  font-weight: 600;
+  color: #9fb3c3;
   text-align: inherit;
   background: 0 0;
-  border: 0; }
+  border: 0;
+  border-bottom: 1px solid #cccccc;
+  font-size: 10px;
+  font-family: Verdana;
+  text-transform: uppercase;
+  margin: 0; }
 
-.moreMenu-item:hover {
-  cursor: pointer; }
+:host:hover {
+  cursor: pointer;
+  color: #55a0c2;
+  background-color: #eff6e1; }
+
+.moreMenu-innerIcon {
+  padding-right: 10px; }
