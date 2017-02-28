@@ -26,9 +26,12 @@
     "watch:css": "node-sass -w src -o src"
   },
   "private": true,
-  "peerDependencies": {
-    "@angular/core": "^2.0.0",
+  "dependencies": {
+    "suprematism-font-icons": "github:cinbcuniversal/suprematism-font-icons",
     "suprematism-style-guide": "github:cinbcuniversal/suprematism-style-guide"
+  },
+  "peerDependencies": {
+    "@angular/core": "^2.0.0"
   },
   "devDependencies": {
     "@angular/common": "2.0.0",
