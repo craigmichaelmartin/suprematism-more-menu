@@ -13,13 +13,14 @@ export declare class MoreMenuComponent implements OnDestroy, AfterContentInit, O
     static defaultIsInValue: boolean;
     private _state;
     state: any;
+    label: string;
     private options$;
     menuItems: QueryList<MoreMenuItemComponent>;
     private isInSubject;
     private isIn$;
     private subscription;
     itemSelected: EventEmitter<{}>;
-    static createNewState({align, alignSubject, align$, vivid, vividSubject, vivid$, visible, visibleSubject, visible$}: any): StateInterface;
+    static createNewState({align, alignSubject, align$, vivid, vividSubject, vivid$, visible, visibleSubject, visible$, label}: any): StateInterface;
     ngOnInit(): void;
     ngAfterContentInit(): void;
     ngOnDestroy(): void;

@@ -9,6 +9,7 @@ export interface StateInterface {
   vivid$: Observable<boolean>;
   visibleSubject: Subject<boolean>;
   visible$: Observable<boolean>;
+  label?: string;
 
   // hack: see note in itemUpdated fn
   visibleOriginal?: boolean;

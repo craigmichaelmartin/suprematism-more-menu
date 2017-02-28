@@ -8,4 +8,7 @@
 <div *ngIf="(options$ | async).isIn" [ngClass]="['align-' + (options$ | async).align]"
   class="js-moreMenuItems moreMenu-items">
     <ng-content></ng-content>
+    <div *ngIf="label" class="moreMenu-label">
+      {{label}}
+    </div>
 </div>
