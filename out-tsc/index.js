@@ -43,4 +43,4 @@ var MoreMenuModule = (function () {
     return MoreMenuModule;
 }());
 exports.MoreMenuModule = MoreMenuModule;
-//# sourceMappingURL=/Users/falosakers/Documents/Projects/suprematism-more-menu/src/index.js.map
+//# sourceMappingURL=/Users/craigmartin/projects/suprematism-more-menu/src/index.js.map

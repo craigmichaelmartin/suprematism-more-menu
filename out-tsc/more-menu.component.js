@@ -39,18 +39,20 @@ var MoreMenuComponent = (function () {
     });
     // Public Static Methods
     MoreMenuComponent.createNewState = function (_a) {
-        var _b = _a.align, align = _b === void 0 ? this.defaultAlignValue : _b, _c = _a.alignSubject, alignSubject = _c === void 0 ? new Subject_1.Subject() : _c, align$ = _a.align$, _d = _a.vivid, vivid = _d === void 0 ? this.defaultVividValue : _d, _e = _a.vividSubject, vividSubject = _e === void 0 ? new Subject_1.Subject() : _e, vivid$ = _a.vivid$, _f = _a.visible, visible = _f === void 0 ? this.defaultVisibleValue : _f, _g = _a.visibleSubject, visibleSubject = _g === void 0 ? new Subject_1.Subject() : _g, visible$ = _a.visible$;
+        var _b = _a.align, align = _b === void 0 ? this.defaultAlignValue : _b, _c = _a.alignSubject, alignSubject = _c === void 0 ? new Subject_1.Subject() : _c, align$ = _a.align$, _d = _a.vivid, vivid = _d === void 0 ? this.defaultVividValue : _d, _e = _a.vividSubject, vividSubject = _e === void 0 ? new Subject_1.Subject() : _e, vivid$ = _a.vivid$, _f = _a.visible, visible = _f === void 0 ? this.defaultVisibleValue : _f, _g = _a.visibleSubject, visibleSubject = _g === void 0 ? new Subject_1.Subject() : _g, visible$ = _a.visible$, label = _a.label;
         return {
             alignSubject: alignSubject, align$: align$ || alignSubject.startWith(align),
             vividSubject: vividSubject, vivid$: vivid$ || vividSubject.startWith(vivid),
             visibleSubject: visibleSubject, visible$: visible$ || visibleSubject.startWith(visible),
             visibleOriginal: visible && !visible$,
-            vividOriginal: vivid && !vivid$ // hack: see note in itemUpdated fn
+            vividOriginal: vivid && !vivid$,
+            label: label
         };
     };
     // Lifecyle Callbacks
     MoreMenuComponent.prototype.ngOnInit = function () {
-        var _a = this.state, align$ = _a.align$, vivid$ = _a.vivid$, visible$ = _a.visible$;
+        var _a = this.state, align$ = _a.align$, vivid$ = _a.vivid$, visible$ = _a.visible$, label = _a.label;
+        this.label = label;
         this.options$ = combineLatest_1.combineLatest(align$, vivid$, visible$, this.isIn$, argsToObj);
     };
     MoreMenuComponent.prototype.ngAfterContentInit = function () {
@@ -139,4 +141,4 @@ var MoreMenuComponent = (function () {
     return MoreMenuComponent;
 }());
 exports.MoreMenuComponent = MoreMenuComponent;
-//# sourceMappingURL=/Users/falosakers/Documents/Projects/suprematism-more-menu/src/more-menu.component.js.map
+//# sourceMappingURL=/Users/craigmartin/projects/suprematism-more-menu/src/more-menu.component.js.map

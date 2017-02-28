@@ -26,10 +26,10 @@ const argsToObj = function(align, vivid, visible, isIn) {
 export class MoreMenuComponent implements OnDestroy, AfterContentInit, OnInit {
 
   // Static Member Variables
-  static defaultVividValue: boolean = true;
+  static defaultVividValue = true;
   static defaultAlignValue: AlignType = 'right';
-  static defaultVisibleValue: boolean = true;
-  static defaultIsInValue: boolean = false;
+  static defaultVisibleValue = true;
+  static defaultIsInValue = false;
 
   // Properties
 
@@ -38,6 +38,7 @@ export class MoreMenuComponent implements OnDestroy, AfterContentInit, OnInit {
   get state() {
     return this._state;
   }
+  label: string;
 
   // Used for subscribe for the template
   private options$: Observable<MoreMenuOptionsInterface>;
@@ -68,14 +69,16 @@ export class MoreMenuComponent implements OnDestroy, AfterContentInit, OnInit {
   static createNewState({
     align = this.defaultAlignValue, alignSubject = new Subject(), align$,
     vivid = this.defaultVividValue, vividSubject = new Subject(), vivid$,
-    visible = this.defaultVisibleValue, visibleSubject = new Subject(), visible$
+    visible = this.defaultVisibleValue, visibleSubject = new Subject(), visible$,
+    label
   }: any): StateInterface {
     return {
       alignSubject, align$: align$ || alignSubject.startWith(align),
       vividSubject, vivid$: vivid$ || vividSubject.startWith(vivid),
       visibleSubject, visible$: visible$ || visibleSubject.startWith(visible),
       visibleOriginal: visible && !visible$, // hack: see note in itemUpdated fn
-      vividOriginal: vivid && !vivid$ // hack: see note in itemUpdated fn
+      vividOriginal: vivid && !vivid$, // hack: see note in itemUpdated fn
+      label
     };
   }
 
@@ -83,7 +86,8 @@ export class MoreMenuComponent implements OnDestroy, AfterContentInit, OnInit {
   // Lifecyle Callbacks
 
   ngOnInit() {
-    const { align$, vivid$, visible$ } = this.state;
+    const { align$, vivid$, visible$, label } = this.state;
+    this.label = label;
     this.options$ = combineLatest(align$, vivid$, visible$, this.isIn$, argsToObj);
   }
 
