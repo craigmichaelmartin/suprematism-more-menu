@@ -8,6 +8,7 @@ export interface StateInterface {
     vivid$: Observable<boolean>;
     visibleSubject: Subject<boolean>;
     visible$: Observable<boolean>;
+    label?: string;
     visibleOriginal?: boolean;
     vividOriginal?: boolean;
 }

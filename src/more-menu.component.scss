@@ -2,7 +2,7 @@
 @import "../node_modules/suprematism-style-guide/dist/utils/z-indexes";
 
 $icon-width: 20px;
-$menu-width: 120px;
+$menu-width: 130px;
 $align-left-margin-left: - ($menu-width - $icon-width);
 $align-middle-margin-left: - ($menu-width/2 - $icon-width/2);
 $align-right-margin-left: inherit;
@@ -59,4 +59,15 @@ $menu-height-max: 180px;
 }
 .moreMenu-items.align-right {
   margin-left: $align-right-margin-left;
+}
+.moreMenu-label {
+  background-color: $primary;
+  padding: 6px 10px 3px 10px;
+  color: $white;
+  font-size: 9px;
+  font-weight: 600;
+  text-align: center;
+  font-family: Verdana;
+  text-transform: uppercase;
+  margin: 0;
 }

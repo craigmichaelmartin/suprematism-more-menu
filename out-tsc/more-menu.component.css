@@ -39,7 +39,7 @@
 
 .moreMenu-items {
   position: absolute;
-  width: 120px;
+  width: 130px;
   border: 3px solid #55a0c2;
   border-radius: 5px;
   background-color: #ffffff;
@@ -49,10 +49,21 @@
   z-index: 100000; }
 
 .moreMenu-items.align-left {
-  margin-left: -100px; }
+  margin-left: -110px; }
 
 .moreMenu-items.align-middle {
-  margin-left: -50px; }
+  margin-left: -55px; }
 
 .moreMenu-items.align-right {
   margin-left: inherit; }
+
+.moreMenu-label {
+  background-color: #55a0c2;
+  padding: 6px 10px 3px 10px;
+  color: #ffffff;
+  font-size: 9px;
+  font-weight: 600;
+  text-align: center;
+  font-family: Verdana;
+  text-transform: uppercase;
+  margin: 0; }
