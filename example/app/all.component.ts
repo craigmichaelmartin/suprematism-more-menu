@@ -125,6 +125,36 @@ export class ExampleDynamicallyVividMiddleAligned extends ItemSelectable {
 export class ExampleNotVividLeftAligned extends ItemSelectable {}
 
 @Component({
+  selector: 'supre-example-click-open',
+  template: `
+    Click open = true
+    <supre-more-menu
+        (itemSelected)="onItemSelected($event)"
+        [supreState]="{clickOpen: true}"
+        class="js-clickOpen">
+      ${baseMenuItems}
+    </supre-more-menu>
+    ${baseSelected}
+  `
+})
+export class ExampleClickOpen extends ItemSelectable {}
+
+@Component({
+  selector: 'supre-example-click-open-fill-height',
+  template: `
+    Click open = true and fillHeight = true
+    <supre-more-menu
+        (itemSelected)="onItemSelected($event)"
+        [supreState]="{clickOpen: true, fillHeight: true}"
+        class="js-clickOpenFillHeight">
+      ${baseMenuItems}
+    </supre-more-menu>
+    ${baseSelected}
+  `
+})
+export class ExampleClickOpenFillHeight extends ItemSelectable {}
+
+@Component({
   selector: 'supre-example-not-vivid',
   template: `
     A statically not vivid more menu icon

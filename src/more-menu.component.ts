@@ -39,6 +39,10 @@ export class MoreMenuComponent implements OnDestroy, AfterContentInit, OnInit {
     return this._state;
   }
   label: string;
+  clickOpen: boolean;
+  fillHeight: boolean;
+  isIn: boolean;
+  isHovered = false;
 
   // Used for subscribe for the template
   private options$: Observable<MoreMenuOptionsInterface>;
@@ -51,6 +55,7 @@ export class MoreMenuComponent implements OnDestroy, AfterContentInit, OnInit {
   private isIn$: Observable<boolean> = this.isInSubject.startWith(false);
 
   private subscription: Subscription;
+  private isInSubscription: Subscription;
 
 
   // Inputs / Outputs
@@ -70,7 +75,9 @@ export class MoreMenuComponent implements OnDestroy, AfterContentInit, OnInit {
     align = this.defaultAlignValue, alignSubject = new Subject(), align$,
     vivid = this.defaultVividValue, vividSubject = new Subject(), vivid$,
     visible = this.defaultVisibleValue, visibleSubject = new Subject(), visible$,
-    label
+    label,
+    clickOpen = false,
+    fillHeight = false
   }: any): StateInterface {
     return {
       alignSubject, align$: align$ || alignSubject.startWith(align),
@@ -78,7 +85,9 @@ export class MoreMenuComponent implements OnDestroy, AfterContentInit, OnInit {
       visibleSubject, visible$: visible$ || visibleSubject.startWith(visible),
       visibleOriginal: visible && !visible$, // hack: see note in itemUpdated fn
       vividOriginal: vivid && !vivid$, // hack: see note in itemUpdated fn
-      label
+      label,
+      clickOpen,
+      fillHeight
     };
   }
 
@@ -86,8 +95,10 @@ export class MoreMenuComponent implements OnDestroy, AfterContentInit, OnInit {
   // Lifecyle Callbacks
 
   ngOnInit() {
-    const { align$, vivid$, visible$, label } = this.state;
+    const { align$, vivid$, visible$, label, clickOpen, fillHeight } = this.state;
     this.label = label;
+    this.clickOpen = clickOpen;
+    this.fillHeight = fillHeight;
     this.options$ = combineLatest(align$, vivid$, visible$, this.isIn$, argsToObj);
   }
 
@@ -96,10 +107,12 @@ export class MoreMenuComponent implements OnDestroy, AfterContentInit, OnInit {
     const menuItemsArray = this.menuItems.map(getItemSelected$);
     const selectedMenuItem$ = merge(...menuItemsArray);
     this.subscription = selectedMenuItem$.subscribe(this.itemUpdated.bind(this));
+    this.isInSubscription = this.isIn$.subscribe(isIn => this.isIn = isIn);
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+    this.isInSubscription.unsubscribe();
   }
 
 
@@ -108,13 +121,31 @@ export class MoreMenuComponent implements OnDestroy, AfterContentInit, OnInit {
   @HostListener('focusin')
   @HostListener('mouseenter')
   public showMenuOnHover(): void {
-    this.showMenu();
+    this.isHovered = true;
+    if (!this.clickOpen) {
+      this.showMenu();
+    }
   }
 
   @HostListener('focusout')
   @HostListener('mouseleave')
   public hideOnHover(): void {
-    this.hideMenu();
+    this.isHovered = false;
+    if (!this.clickOpen) {
+      this.hideMenu();
+    }
+  }
+
+  @HostListener('click')
+  public showMenuOnClick(): void {
+    if (this.clickOpen) {
+      if (this.isIn) {
+        this.hideMenu();
+      } else {
+        this.showMenu();
+
+      }
+    }
   }
 
 
@@ -142,14 +173,10 @@ export class MoreMenuComponent implements OnDestroy, AfterContentInit, OnInit {
 
   protected provideDefaultOptions(options): MoreMenuOptionsInterface {
     return {
-      isIn: options.isIn != null ?
-        options.isIn : MoreMenuComponent.defaultIsInValue,
-      align: options.align != null ?
-        options.align : MoreMenuComponent.defaultAlignValue,
-      vivid: options.vivid != null ?
-        options.vivid : MoreMenuComponent.defaultVividValue,
-      visible: options.visible != null ?
-        options.visible : MoreMenuComponent.defaultVisibleValue
+      isIn: options.isIn != null ? options.isIn : MoreMenuComponent.defaultIsInValue,
+      align: options.align != null ? options.align : MoreMenuComponent.defaultAlignValue,
+      vivid: options.vivid != null ? options.vivid : MoreMenuComponent.defaultVividValue,
+      visible: options.visible != null ? options.visible : MoreMenuComponent.defaultVisibleValue,
     };
   }
 
