@@ -1,9 +1,10 @@
 <span class="moreMenu-iconContainer">
   <i [ngClass]="[
       (options$ | async).isIn ? 'isActive' : 'isInactive',
+      (options$ | async).isIn ? 'u-supre-icon--more-menu-fill' : 'u-supre-icon--more-menu-stoke',
       (options$ | async).vivid ? 'isVivid' : 'isNotVivid',
       (options$ | async).visible ? 'isVisible' : 'isNotVisible']"
-    class="moreMenu-icon js-moreMenuIcon"></i>
+    class="moreMenu-icon u-supre-icon js-moreMenuIcon"></i>
 </span>
 <div *ngIf="(options$ | async).isIn" [ngClass]="['align-' + (options$ | async).align]"
   class="js-moreMenuItems moreMenu-items">

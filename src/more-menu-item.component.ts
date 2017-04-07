@@ -5,15 +5,15 @@ import { Item } from './item';
 
 @Component({
   selector: 'supre-more-menu-item',
-  template: require('./more-menu-item.component.html'),
-  styles: [require('./more-menu-item.component.css')]
+  templateUrl: './more-menu-item.component.html',
+  styleUrls: ['./more-menu-item.component.scss']
 })
 export class MoreMenuItemComponent {
 
   // Inputs / Outputs
 
-  @Input('supreItem')
-  public item: Item;
+  // tslint:disable-next-line:no-input-rename
+  @Input('supreItem') public item: Item;
 
 
   // Properties
