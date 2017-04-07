@@ -10,7 +10,7 @@ import { AllExamplesComponent, ExampleNoOptions, ExampleLeftAligned,
     ExampleForDataGridUseCase, PertinentExampleComponent
   } from './all.component';
 import { AppComponent } from './app.component';
-import { MoreMenuModule } from '../../src/index';
+import { MoreMenuModule } from '../../src';
 
 const routes = [
   { path: '', component: PertinentExampleComponent },

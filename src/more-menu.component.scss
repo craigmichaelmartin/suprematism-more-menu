@@ -1,6 +1,5 @@
 @import "scss/colors";
-@import "../node_modules/suprematism-font-icons/style.scss";
-@import "../node_modules/suprematism-style-guide/dist/utils/z-indexes";
+@import "utils/z-indexes";
 
 $icon-width: 20px;
 $menu-width: 130px;
@@ -34,13 +33,9 @@ $menu-height-max: 180px;
   color: $primary-vivid;
 }
 .moreMenu-icon.isActive {
-  @extend .u-supre-icon;
-  @extend .u-supre-icon--more-menu-fill;
   color: $primary-active;
 }
 .moreMenu-icon {
-  @extend .u-supre-icon;
-  @extend .u-supre-icon--more-menu-stoke;
   color: $secondary-color;
   width: 1em;
   height: 1em;

@@ -1,7 +1,7 @@
 import { Component, HostListener } from '@angular/core';
-import { Subject }   from 'rxjs/Subject';
+import { Subject } from 'rxjs/Subject';
 import { MoreMenuOptionsInterface } from '../../src/more-menu-options.interface';
-import { Observable }   from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 
 declare var require: any;
 

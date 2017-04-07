@@ -5,10 +5,10 @@ import { MoreMenuItemComponent } from './more-menu-item.component';
 import { Item } from './item';
 import { AlignType } from './align.type';
 import { MoreMenuOptionsInterface } from './more-menu-options.interface';
-import { Subscription }   from 'rxjs/Subscription';
-import { Subject }   from 'rxjs/Subject';
+import { Subscription } from 'rxjs/Subscription';
+import { Subject } from 'rxjs/Subject';
 import { merge } from 'rxjs/observable/merge';
-import { Observable }   from 'rxjs/observable';
+import { Observable } from 'rxjs/observable';
 import { combineLatest } from 'rxjs/observable/combineLatest';
 import { StateInterface } from './state.interface';
 import 'rxjs/add/operator/map';
@@ -20,8 +20,8 @@ const argsToObj = function(align, vivid, visible, isIn) {
 
 @Component({
   selector: 'supre-more-menu',
-  template: require('./more-menu.component.html'),
-  styles: [require('./more-menu.component.css')]
+  templateUrl: './more-menu.component.html',
+  styleUrls: ['./more-menu.component.scss']
 })
 export class MoreMenuComponent implements OnDestroy, AfterContentInit, OnInit {
 
