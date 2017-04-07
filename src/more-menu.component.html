@@ -1,13 +1,20 @@
 <span class="moreMenu-iconContainer">
   <i [ngClass]="[
-      (options$ | async).isIn ? 'isActive' : 'isInactive',
-      (options$ | async).isIn ? 'u-supre-icon--more-menu-fill' : 'u-supre-icon--more-menu-stoke',
+      (options$ | async).isIn || isHovered ? 'isActive' : 'isInactive',
+      (options$ | async).isIn || isHovered ? 'u-supre-icon--more-menu-fill' : 'u-supre-icon--more-menu-stoke',
       (options$ | async).vivid ? 'isVivid' : 'isNotVivid',
       (options$ | async).visible ? 'isVisible' : 'isNotVisible']"
     class="moreMenu-icon u-supre-icon js-moreMenuIcon"></i>
 </span>
-<div *ngIf="(options$ | async).isIn" [ngClass]="['align-' + (options$ | async).align]"
-  class="js-moreMenuItems moreMenu-items">
+<div *ngIf="(options$ | async).isIn"
+     [ngClass]="[
+        'align-' + (options$ | async).align,
+        fillHeight ? 'fillHeight' : ''
+      ]"
+     class="js-moreMenuItems moreMenu-items">
+    <div *ngIf="fillHeight" class="u-type-right _prxs">
+      <span><i class="isActive moreMenu-icon u-supre-icon u-supre-icon--more-menu-fill u-type-right"></i></span>
+    </div>
     <ng-content></ng-content>
     <div *ngIf="label" class="moreMenu-label">
       {{label}}

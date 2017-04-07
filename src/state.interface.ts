@@ -10,6 +10,8 @@ export interface StateInterface {
   visibleSubject: Subject<boolean>;
   visible$: Observable<boolean>;
   label?: string;
+  clickOpen: boolean;
+  fillHeight: boolean;
 
   // hack: see note in itemUpdated fn
   visibleOriginal?: boolean;

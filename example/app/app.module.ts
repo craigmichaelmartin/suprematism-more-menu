@@ -7,7 +7,8 @@ import { AllExamplesComponent, ExampleNoOptions, ExampleLeftAligned,
     ExampleDynamicallyVividMiddleAligned, ExampleNotVividLeftAligned,
     ExampleNotVivid, ExampleVivid, ExampleVisible, ExampleNotVisible,
     ExampleDynamicallyVisible, ExampleDynamicallyVisibleLeftAligned,
-    ExampleForDataGridUseCase, PertinentExampleComponent
+    ExampleForDataGridUseCase, PertinentExampleComponent, ExampleClickOpen,
+    ExampleClickOpenFillHeight
   } from './all.component';
 import { AppComponent } from './app.component';
 import { MoreMenuModule } from '../../src';
@@ -36,7 +37,9 @@ const routes = [
     ExampleDynamicallyVividMiddleAligned,
     ExampleDynamicallyVisibleLeftAligned,
     ExampleNotVividLeftAligned,
-    ExampleForDataGridUseCase
+    ExampleForDataGridUseCase,
+    ExampleClickOpen,
+    ExampleClickOpenFillHeight
   ],
   imports: [
     RouterModule.forRoot(routes),
