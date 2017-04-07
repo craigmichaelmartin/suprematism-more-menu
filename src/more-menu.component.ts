@@ -8,7 +8,7 @@ import { MoreMenuOptionsInterface } from './more-menu-options.interface';
 import { Subscription } from 'rxjs/Subscription';
 import { Subject } from 'rxjs/Subject';
 import { merge } from 'rxjs/observable/merge';
-import { Observable } from 'rxjs/observable';
+import { Observable } from 'rxjs/Observable';
 import { combineLatest } from 'rxjs/observable/combineLatest';
 import { StateInterface } from './state.interface';
 import 'rxjs/add/operator/map';
