@@ -12,6 +12,7 @@ export interface StateInterface {
   label?: string;
   clickOpen: boolean;
   fillHeight: boolean;
+  delayClose: number;
 
   // hack: see note in itemUpdated fn
   visibleOriginal?: boolean;

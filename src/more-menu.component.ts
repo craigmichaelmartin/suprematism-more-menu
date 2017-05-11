@@ -43,6 +43,7 @@ export class MoreMenuComponent implements OnDestroy, AfterContentInit, OnInit {
   fillHeight: boolean;
   isIn: boolean;
   isHovered = false;
+  delayClose = 0;
 
   // Used for subscribe for the template
   private options$: Observable<MoreMenuOptionsInterface>;
@@ -77,7 +78,8 @@ export class MoreMenuComponent implements OnDestroy, AfterContentInit, OnInit {
     visible = this.defaultVisibleValue, visibleSubject = new Subject(), visible$,
     label,
     clickOpen = false,
-    fillHeight = false
+    fillHeight = false,
+    delayClose = 0
   }: any): StateInterface {
     return {
       alignSubject, align$: align$ || alignSubject.startWith(align),
@@ -87,7 +89,8 @@ export class MoreMenuComponent implements OnDestroy, AfterContentInit, OnInit {
       vividOriginal: vivid && !vivid$, // hack: see note in itemUpdated fn
       label,
       clickOpen,
-      fillHeight
+      fillHeight,
+      delayClose
     };
   }
 
@@ -95,10 +98,11 @@ export class MoreMenuComponent implements OnDestroy, AfterContentInit, OnInit {
   // Lifecyle Callbacks
 
   ngOnInit() {
-    const { align$, vivid$, visible$, label, clickOpen, fillHeight } = this.state;
+    const { align$, vivid$, visible$, label, clickOpen, fillHeight, delayClose } = this.state;
     this.label = label;
     this.clickOpen = clickOpen;
     this.fillHeight = fillHeight;
+    this.delayClose = delayClose;
     this.options$ = combineLatest(align$, vivid$, visible$, this.isIn$, argsToObj);
   }
 
@@ -156,7 +160,11 @@ export class MoreMenuComponent implements OnDestroy, AfterContentInit, OnInit {
   }
 
   hideMenu(): void {
-    this.isInSubject.next(false);
+    setTimeout(() => {
+      if (!this.isHovered) {
+        this.isInSubject.next(false);
+      }
+    }, this.delayClose);
   }
 
 
