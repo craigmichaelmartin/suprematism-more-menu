@@ -1,7 +1,7 @@
 <span class="moreMenu-iconContainer">
   <i [ngClass]="[
       (options$ | async).isIn || isHovered ? 'isActive' : 'isInactive',
-      (options$ | async).isIn || isHovered ? 'u-supre-icon--more-menu-fill' : 'u-supre-icon--more-menu-stoke',
+      (options$ | async).isIn || isHovered ? 'u-supre-icon--more-menu-fill' : 'u-supre-icon--more-menu-dots-only',
       (options$ | async).vivid ? 'isVivid' : 'isNotVivid',
       (options$ | async).visible ? 'isVisible' : 'isNotVisible']"
     class="moreMenu-icon u-supre-icon js-moreMenuIcon"></i>
