@@ -11,6 +11,9 @@ export interface StateInterface {
   visible$: Observable<boolean>;
   label?: string;
   clickOpen: boolean;
+  hoverOpen: boolean;
+  disableHoverAfterClickTimeout: number;
+  disableClickAfterHoverTimeout: number;
   fillHeight: boolean;
   delayClose: number;
 

@@ -40,8 +40,11 @@ export class MoreMenuComponent implements OnDestroy, AfterContentInit, OnInit {
   }
   label: string;
   clickOpen: boolean;
+  hoverOpen: boolean;
   fillHeight: boolean;
   isIn: boolean;
+  disableHoverAfterClickTimeout: number;
+  disableClickAfterHoverTimeout: number;
   isHovered = false;
   delayClose = 0;
 
@@ -57,6 +60,7 @@ export class MoreMenuComponent implements OnDestroy, AfterContentInit, OnInit {
 
   private subscription: Subscription;
   private isInSubscription: Subscription;
+
 
 
   // Inputs / Outputs
@@ -78,6 +82,9 @@ export class MoreMenuComponent implements OnDestroy, AfterContentInit, OnInit {
     visible = this.defaultVisibleValue, visibleSubject = new Subject(), visible$,
     label,
     clickOpen = false,
+    hoverOpen = true,
+    disableHoverAfterClickTimeout = 1000,
+    disableClickAfterHoverTimeout = 1000,
     fillHeight = false,
     delayClose = 0
   }: any): StateInterface {
@@ -89,6 +96,9 @@ export class MoreMenuComponent implements OnDestroy, AfterContentInit, OnInit {
       vividOriginal: vivid && !vivid$, // hack: see note in itemUpdated fn
       label,
       clickOpen,
+      hoverOpen,
+      disableHoverAfterClickTimeout,
+      disableClickAfterHoverTimeout,
       fillHeight,
       delayClose
     };
@@ -98,9 +108,14 @@ export class MoreMenuComponent implements OnDestroy, AfterContentInit, OnInit {
   // Lifecyle Callbacks
 
   ngOnInit() {
-    const { align$, vivid$, visible$, label, clickOpen, fillHeight, delayClose } = this.state;
+    const { align$, vivid$, visible$, label, clickOpen, hoverOpen,
+      disableHoverAfterClickTimeout, disableClickAfterHoverTimeout, fillHeight,
+      delayClose } = this.state;
     this.label = label;
     this.clickOpen = clickOpen;
+    this.hoverOpen = hoverOpen;
+    this.disableHoverAfterClickTimeout = disableHoverAfterClickTimeout;
+    this.disableClickAfterHoverTimeout = disableClickAfterHoverTimeout;
     this.fillHeight = fillHeight;
     this.delayClose = delayClose;
     this.options$ = combineLatest(align$, vivid$, visible$, this.isIn$, argsToObj);
@@ -126,7 +141,11 @@ export class MoreMenuComponent implements OnDestroy, AfterContentInit, OnInit {
   @HostListener('mouseenter')
   public showMenuOnHover(): void {
     this.isHovered = true;
-    if (!this.clickOpen) {
+    this.clickOpen = false;
+    setTimeout(() => {
+      this.clickOpen = true;
+    }, this.disableClickAfterHoverTimeout);
+    if (this.hoverOpen) {
       this.showMenu();
     }
   }
@@ -135,7 +154,7 @@ export class MoreMenuComponent implements OnDestroy, AfterContentInit, OnInit {
   @HostListener('mouseleave')
   public hideOnHover(): void {
     this.isHovered = false;
-    if (!this.clickOpen) {
+    if (this.hoverOpen) {
       this.hideMenu();
     }
   }
@@ -144,10 +163,13 @@ export class MoreMenuComponent implements OnDestroy, AfterContentInit, OnInit {
   public showMenuOnClick(): void {
     if (this.clickOpen) {
       if (this.isIn) {
-        this.hideMenu();
+        this.hoverOpen = false;
+        this.hideMenu(true);
+        setTimeout(() => {
+          this.hoverOpen = true;
+        }, this.disableHoverAfterClickTimeout);
       } else {
         this.showMenu();
-
       }
     }
   }
@@ -159,12 +181,18 @@ export class MoreMenuComponent implements OnDestroy, AfterContentInit, OnInit {
     this.isInSubject.next(true);
   }
 
-  hideMenu(): void {
-    setTimeout(() => {
-      if (!this.isHovered) {
+  hideMenu(force = false): void {
+    if (!this.isHovered || force) {
+      if (this.clickOpen && this.isHovered) {
         this.isInSubject.next(false);
+      } else {
+        setTimeout(() => {
+          if (!this.isHovered || force) {
+            this.isInSubject.next(false);
+          }
+        }, this.delayClose);
       }
-    }, this.delayClose);
+    }
   }
 
 
@@ -177,15 +205,6 @@ export class MoreMenuComponent implements OnDestroy, AfterContentInit, OnInit {
     // event not firing when more menu is dynamically closed
     this.state.visibleSubject.next(this.state.visibleOriginal);
     this.state.vividSubject.next(this.state.vividOriginal);
-  }
-
-  protected provideDefaultOptions(options): MoreMenuOptionsInterface {
-    return {
-      isIn: options.isIn != null ? options.isIn : MoreMenuComponent.defaultIsInValue,
-      align: options.align != null ? options.align : MoreMenuComponent.defaultAlignValue,
-      vivid: options.vivid != null ? options.vivid : MoreMenuComponent.defaultVividValue,
-      visible: options.visible != null ? options.visible : MoreMenuComponent.defaultVisibleValue,
-    };
   }
 
 }
